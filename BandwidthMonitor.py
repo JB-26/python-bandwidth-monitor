@@ -4,6 +4,8 @@ import datetime
 
 bytesSnt = []
 bytesRec = []
+bytesSntX = []
+bytesRecY = []
 currentTime = datetime.datetime.now().time().strftime("%H:%M:%S")
 resGraph = plt
 print('Set the time when you want the network monitoring to stop')
@@ -21,12 +23,14 @@ print(f'Now monitoring network usage - monitoring will stop at {setTime}')
 while currentTime != setTime:
     currentTime = datetime.datetime.now().time().strftime("%H:%M:%S")
     bytesSnt.append(psutil.net_io_counters().bytes_sent / 1000000)
+    bytesSntX.append(psutil.net_io_counters().bytes_sent)
     bytesRec.append(psutil.net_io_counters().bytes_recv / 1000000)
+    bytesRecY.append(psutil.net_io_counters().bytes_recv)
 
 print('Monitoring complete!')
 totalSent = int(sum(bytesSnt) / 1000000)
 totalRec = int(sum(bytesRec) / 1000000)
 print(f'You sent a total of {totalSent} MB')
 print(f'You received a total of {totalRec} MB')
-resGraph.plot(bytesSnt, bytesRec)
+resGraph.plot(bytesSntX, bytesRecY)
 resGraph.show()
