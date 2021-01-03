@@ -7,16 +7,15 @@ bytesRec = []
 bytesSntX = []
 bytesRecY = []
 currentTime = datetime.datetime.now().time().strftime("%H:%M:%S")
-resGraph = plt
 print('Set the time when you want the network monitoring to stop')
 hour = int(input('Enter the hour - '))
 minute = int(input('Enter the minute - '))
 second = int(input('Enter the second - '))
 setTime = datetime.time(hour,minute,second)
 setTime = str(setTime)
-resGraph.title(label=f'Bandwidth Usage from {currentTime} to {setTime}')
-resGraph.xlabel('Bytes Sent')
-resGraph.ylabel('Bytes Received')
+plt.title(label=f'Bandwidth Usage from {currentTime} to {setTime}')
+plt.xlabel('Bytes Sent')
+plt.ylabel('Bytes Received')
 print(f'Now monitoring network usage - monitoring will stop at {setTime}')
 
 
@@ -32,5 +31,5 @@ totalSent = int(sum(bytesSnt) / 1000000)
 totalRec = int(sum(bytesRec) / 1000000)
 print(f'You sent a total of {totalSent} MB')
 print(f'You received a total of {totalRec} MB')
-resGraph.plot(bytesSntX, bytesRecY)
-resGraph.show()
+plt.plot(bytesSntX, bytesRecY)
+plt.show()
